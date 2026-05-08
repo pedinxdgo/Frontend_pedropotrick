@@ -3,22 +3,61 @@ h1 {
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 50px;
+    font-style: bold;
 }
 h3 {
-    color: rgb(233, 236, 60);
+    color: rgb(255, 255, 255);
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 30px;
+    border-bottom: 1px solid #81c9fa;
+    padding-bottom: 10px;
 }
 body {
-    background-color: rgb(51, 46, 46);
+    background-color: #ffffff;
     color: white;
     display: flex;
     justify-content: center;
     padding: 20px;
 }
 
-.formulario{
-    : 50px;
+p {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 25px;
 
+}
+
+.container {
+    width: 650px;
+    background-color: #1465bb;
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid #000000;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.card {
+    background: #252525;
+    padding: 15px;
+    border-radius: 5px;
+    border-left: 5px solid #00ff88;
+}
+
+button {
+    width: 100%;
+    padding: 15px;
+    margin-top: 20px;
+    background-color: #2196f3;
+    border: none;
+    border-radius: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    color: white;
+}
+
+button:hover {
+    background-color: #2186d8;
 }
