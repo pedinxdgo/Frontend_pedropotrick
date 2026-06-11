@@ -17,11 +17,18 @@ function executarSistema() {
         btn.disable = true;
         btn.innerText = "Processando...";
 
-        //trim remove os espaços vazios
+       
+        // trim() remove os espaços em branco
         const nome = inputNome.value.trim();
         const idade = parseInt(inputIdade.value);
         const valor = parseFloat(inputValor.value);
         const cupom = inputCupom.value === "true";
+
+        //Histórico de Dados
+        const clientes = []
+        clientes.push(nome);
+        const valorCompra = []
+        valorCompra.push(valorFinal);
 
         // Validação para campos vazios
         if (!nome || isNaN(idade) || isNaN(valor)) {
@@ -37,36 +44,44 @@ function executarSistema() {
 
             // Desconto
             let valorFinal = (valor > 500 || cupom) ? valor * 0.85 : valor;
-
+            let valorDesconto = (valor > 500 || cupom) ? valor - valorFinal : 0;
+            let percentDesconto = (valor > 500 || cupom) ? 15 : 0;
+            
             // Estoque
             let estoque = ["Placa de Vídeo", "Processador", "Memória RAM"];
             lista.innerHTML = ""; // Limpa a lista anterior
 
-            //ForEach percorre um array e aplica uma ação para cada elemento
+            // forEach: Percorre um array e aplica uma ação para cada elemento
             estoque.forEach(item => {
                 let li = document.createElement("li");
                 li.innerText = `Item ${item} reservado.`;
-                lista.appendChild(li); //usado para adicionar um novo elemento ou texto
+                lista.appendChild(li); // usado para adicionar um novo elemento ou texto
+            });
 
+            function guardarDados {
+                localStorage.setItem("nome", document.getElementById("nome").value);
+                localStorage.setItem("valorFinal", document.getElementById("valorFinal").value);
+                
+                setStyles();
+            }
 
-            })
-
-            //Relatório
+            // Relatório
             relatorio.style.display = "block";
             relatorio.innerHTML = `
-        <strong> RESUMO DO PEDIDO<\strong><br>
-        Cliente: ${nome} <br>
-        Total Original: R$ ${valor.toFixed(2)} <br>
-        <strong> Total com Desconto: R$ ${valorFinal.toFixed(2)} <\strong>`
-        }
-
-        else {
+            <strong> RESUMO DO PEDIDO <\strong><br>
+            Cliente: ${nome} <br>
+            Total Original: R$ ${valor.toFixed(2)} <br>
+            <strong> Total com Desconto: R$ ${valorFinal.toFixed(2)} <\strong> <br>
+            <strong> Total Economizado: R$ ${valorDesconto.toFixed(2)} <\strong> <br>
+            <strong> Percentual de Desconto: ${percentDesconto}% <\strong> <br>
+            <strong Categoria do cliente: 
+        `;
+        } else {
             msg.innerText = "Venda bloqueada: Menor de 16 anos.";
             msg.style.color = "#ff4444";
-            relatorio.style.display = "none"
+            relatorio.style.display = "none";
             lista.innerHTML = "";
         }
-
     } catch (error) {
 
     }
