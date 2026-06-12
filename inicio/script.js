@@ -17,18 +17,21 @@ function executarSistema() {
         btn.disable = true;
         btn.innerText = "Processando...";
 
-       
         // trim() remove os espaços em branco
         const nome = inputNome.value.trim();
         const idade = parseInt(inputIdade.value);
         const valor = parseFloat(inputValor.value);
         const cupom = inputCupom.value === "true";
 
-        //Histórico de Dados
-        const clientes = []
-        clientes.push(nome);
-        const valorCompra = []
-        valorCompra.push(valorFinal);
+        window.localStorage.setItem = nome;
+            window.localStorage.getItem = nome
+            window.localStorage.setItem = valor;
+            window.localStorage.getItem = valor;
+
+            let valorCompra = 0;
+            if (nome == nome) {
+                valorCompra = valor + valor;
+            }
 
         // Validação para campos vazios
         if (!nome || isNaN(idade) || isNaN(valor)) {
@@ -46,7 +49,7 @@ function executarSistema() {
             let valorFinal = (valor > 500 || cupom) ? valor * 0.85 : valor;
             let valorDesconto = (valor > 500 || cupom) ? valor - valorFinal : 0;
             let percentDesconto = (valor > 500 || cupom) ? 15 : 0;
-            
+
             // Estoque
             let estoque = ["Placa de Vídeo", "Processador", "Memória RAM"];
             lista.innerHTML = ""; // Limpa a lista anterior
@@ -58,13 +61,6 @@ function executarSistema() {
                 lista.appendChild(li); // usado para adicionar um novo elemento ou texto
             });
 
-            function guardarDados {
-                localStorage.setItem("nome", document.getElementById("nome").value);
-                localStorage.setItem("valorFinal", document.getElementById("valorFinal").value);
-                
-                setStyles();
-            }
-
             // Relatório
             relatorio.style.display = "block";
             relatorio.innerHTML = `
@@ -74,7 +70,7 @@ function executarSistema() {
             <strong> Total com Desconto: R$ ${valorFinal.toFixed(2)} <\strong> <br>
             <strong> Total Economizado: R$ ${valorDesconto.toFixed(2)} <\strong> <br>
             <strong> Percentual de Desconto: ${percentDesconto}% <\strong> <br>
-            <strong Categoria do cliente: 
+            <strong> Valor Histórico de Compras: ${valorCompra} <\strong> <br>
         `;
         } else {
             msg.innerText = "Venda bloqueada: Menor de 16 anos.";
@@ -82,6 +78,11 @@ function executarSistema() {
             relatorio.style.display = "none";
             lista.innerHTML = "";
         }
+        
+            
+            
+        
+
     } catch (error) {
 
     }
