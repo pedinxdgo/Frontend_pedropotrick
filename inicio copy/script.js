@@ -22,16 +22,14 @@ function executarSistema() {
         const idade = parseInt(inputIdade.value);
         const valor = parseFloat(inputValor.value);
         const cupom = inputCupom.value === "true";
-
-        window.localStorage.setItem = nome;
-        window.localStorage.setItem = valor;
-            window.localStorage.getItem = nome;
-            window.localStorage.setItem = valor;
-            let valorCompra = 0;
-            if (getItem(nome) == nome) {
-                valorCompra = valor + getItem(valor);
-            }
-
+        
+        localStorage.setItem("name", nome);
+        localStorage.setItem("value", valor);
+        localStorage.getItem("name");
+        localStorage.getItem("value");
+        console.log(valor, nome);
+        
+        
         // Validação para campos vazios
         if (!nome || isNaN(idade) || isNaN(valor)) {
             msg.innerText = "Preencha todos os campos corretamente!";
@@ -60,6 +58,8 @@ function executarSistema() {
                 lista.appendChild(li); // usado para adicionar um novo elemento ou texto
             });
 
+            //add();
+
             // Relatório
             relatorio.style.display = "block";
             relatorio.innerHTML = `
@@ -69,19 +69,14 @@ function executarSistema() {
             <strong> Total com Desconto: R$ ${valorFinal.toFixed(2)} <\strong> <br>
             <strong> Total Economizado: R$ ${valorDesconto.toFixed(2)} <\strong> <br>
             <strong> Percentual de Desconto: ${percentDesconto}% <\strong> <br>
-            <strong> Valor Histórico de Compras: ${valorCompra} <\strong> <br>
-        `;
+            
+            `;
         } else {
             msg.innerText = "Venda bloqueada: Menor de 16 anos.";
             msg.style.color = "#ff4444";
             relatorio.style.display = "none";
             lista.innerHTML = "";
         }
-        
-            
-            
-        
-
     } catch (error) {
 
     }
