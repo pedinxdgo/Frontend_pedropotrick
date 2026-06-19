@@ -22,12 +22,12 @@ function executarSistema() {
         const idade = parseInt(inputIdade.value);
         const valor = parseFloat(inputValor.value);
         const cupom = inputCupom.value === "true";
-        
+
+        let usuarios = JSON.parse(localStorage.getItem("usuarios")) || {};
+
         localStorage.setItem("name", nome);
-        localStorage.setItem("value", valor);
-        localStorage.getItem("name");
-        localStorage.getItem("value");
-        console.log(valor, nome);
+        const nomeLocal = localStorage.getItem("name");
+        const valorLocal = localStorage.getItem("value");
         
         
         // Validação para campos vazios
@@ -58,6 +58,31 @@ function executarSistema() {
                 lista.appendChild(li); // usado para adicionar um novo elemento ou texto
             });
 
+            if (usuarios[nome]) {
+                usuarios[nome] += Number(valorFinal.toFixed(2));
+            } else {
+                usuarios[nome] = Number(valorFinal.toFixed(2));
+            }
+            localStorage.setItem("usuarios", JSON.stringify(usuarios));
+            localStorage.setItem("value", valorFinal);
+            let categoriaCliente;
+
+            if(usuarios[nome] < 1620){
+                categoriaCliente = "Sem Categoria"
+            }
+
+            else if(usuarios[nome] > 1620 && usuarios[nome] < 4500){
+                categoriaCliente = "Bronze";
+            }
+            else if (usuarios[nome] > 4500 && usuarios[nome] < 7500){
+                categoriaCliente = "Prata";
+            }
+            else if (usuarios[nome] > 7500){
+                categoriaCliente = "Ouro";
+            }
+
+
+
             //add();
 
             // Relatório
@@ -69,6 +94,9 @@ function executarSistema() {
             <strong> Total com Desconto: R$ ${valorFinal.toFixed(2)} <\strong> <br>
             <strong> Total Economizado: R$ ${valorDesconto.toFixed(2)} <\strong> <br>
             <strong> Percentual de Desconto: ${percentDesconto}% <\strong> <br>
+            <strong> Histórico de Compras: R$ ${usuarios[nome]} <\strong> <br>
+            <strong> Categoria do cliente: ${categoriaCliente} <\strong> <br>
+
             
             `;
         } else {
