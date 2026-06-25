@@ -24,11 +24,6 @@ function executarSistema() {
         const cupom = inputCupom.value === "true";
 
         let usuarios = JSON.parse(localStorage.getItem("usuarios")) || {};
-
-        localStorage.setItem("name", nome);
-        const nomeLocal = localStorage.getItem("name");
-        const valorLocal = localStorage.getItem("value");
-        
         
         // Validação para campos vazios
         if (!nome || isNaN(idade) || isNaN(valor)) {
@@ -58,15 +53,20 @@ function executarSistema() {
                 lista.appendChild(li); // usado para adicionar um novo elemento ou texto
             });
 
+
+            //Verificação entre valor e nome do cliente
             if (usuarios[nome]) {
                 usuarios[nome] += Number(valorFinal.toFixed(2));
             } else {
                 usuarios[nome] = Number(valorFinal.toFixed(2));
             }
+
+            //add();
             localStorage.setItem("usuarios", JSON.stringify(usuarios));
             localStorage.setItem("value", valorFinal);
             let categoriaCliente;
 
+            //Categoria do cliente
             if(usuarios[nome] < 1620){
                 categoriaCliente = "Sem Categoria"
             }
@@ -81,23 +81,17 @@ function executarSistema() {
                 categoriaCliente = "Ouro";
             }
 
-
-
-            //add();
-
             // Relatório
             relatorio.style.display = "block";
             relatorio.innerHTML = `
             <strong> RESUMO DO PEDIDO <\strong><br>
             Cliente: ${nome} <br>
-            Total Original: R$ ${valor.toFixed(2)} <br>
-            <strong> Total com Desconto: R$ ${valorFinal.toFixed(2)} <\strong> <br>
-            <strong> Total Economizado: R$ ${valorDesconto.toFixed(2)} <\strong> <br>
+            Valor Original: R$ ${valor.toFixed(2)} <br>
+            <strong> Valor com Desconto: R$ ${valorFinal.toFixed(2)} <\strong> <br>
+            <strong> Valor Economizado: R$ ${valorDesconto.toFixed(2)} <\strong> <br>
             <strong> Percentual de Desconto: ${percentDesconto}% <\strong> <br>
-            <strong> Histórico de Compras: R$ ${usuarios[nome]} <\strong> <br>
+            <strong> Valor Histórico de Compras: R$ ${usuarios[nome].toFixed(2)} <\strong> <br>
             <strong> Categoria do cliente: ${categoriaCliente} <\strong> <br>
-
-            
             `;
         } else {
             msg.innerText = "Venda bloqueada: Menor de 16 anos.";
