@@ -71,7 +71,7 @@ function executarSistema() {
                 categoriaCliente = "Sem Categoria"
             }
 
-            else if(usuarios[nome] > 1620 && usuarios[nome] < 4500){
+            else if(usuarios[nome] >= 1620 && usuarios[nome] < 4500){
                 categoriaCliente = "Bronze";
             }
             else if (usuarios[nome] >= 4500 && usuarios[nome] < 7500){
